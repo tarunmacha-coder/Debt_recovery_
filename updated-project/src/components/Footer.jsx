@@ -1,10 +1,10 @@
 import React from 'react';
 import { Logo, LinkedIn } from './Icons.jsx';
 
-const PLATFORM = ['AI Voice Agents', 'WhatsApp', 'Field Collections', 'Analytics', 'Compliance'];
-const COMPANY  = ['About', 'Jobs', 'Press', 'Partners', 'Contact'];
+const PLATFORM  = ['AI Voice Agents', 'WhatsApp', 'Field Collections', 'Analytics', 'Compliance'];
+const COMPANY   = ['About', 'Jobs', 'Press', 'Partners'];           // Contact removed (section removed)
 const RESOURCES = ['Blog', 'Case Studies', 'Documentation', 'Security', 'Status'];
-const LEGAL    = ['Privacy Policy', 'Terms of Service', 'RBI Compliance', 'Data Protection'];
+const LEGAL     = ['Privacy Policy', 'Terms of Service', 'RBI Compliance', 'Data Protection'];
 
 function Column({ title, items }) {
   return (
@@ -30,16 +30,15 @@ export default function Footer() {
               <span className="logo-mark" aria-hidden="true">
                 <Logo style={{ width: 20, height: 20, stroke: '#fff' }} />
               </span>
-              <span className="logo-text">
-                DEBT <span className="gold">RECOVERY</span>
-              </span>
+              {/* Brand name — fully black, no gold split */}
+              <span className="logo-text">DEBT RECOVERY</span>
             </a>
             <p>
               AI-powered debt recovery infrastructure for banks, NBFCs and fintech lenders —
               ethical, scalable and compliant by design.
             </p>
 
-            {/* PDF requirement #8: only LinkedIn icon */}
+            {/* Only LinkedIn icon */}
             <div className="footer-socials">
               <a href="#" aria-label="LinkedIn">
                 <LinkedIn style={{ width: 16, height: 16, stroke: 'var(--ink-soft)' }} />

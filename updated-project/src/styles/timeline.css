@@ -7,17 +7,17 @@
   position: relative;
   padding: 110px 0 120px;
   background:
-    radial-gradient(720px 420px at 78% -6%, rgba(200, 155, 94, 0.12), transparent 70%),
-    radial-gradient(560px 380px at 4% 14%, rgba(200, 155, 94, 0.07), transparent 72%),
-    linear-gradient(180deg, #f8f4ea 0%, #f5f1e8 60%, #f3eee2 100%);
+    radial-gradient(760px 460px at 78% -6%, rgba(240, 199, 94, 0.22), transparent 70%),
+    radial-gradient(600px 400px at 4% 14%, rgba(232, 183, 48, 0.14), transparent 72%),
+    linear-gradient(180deg, #faf4df 0%, #f4eed8 55%, #ede4c4 100%);
   overflow: hidden;
 }
 .recovery::before {
   content: "";
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(26, 29, 41, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 29, 41, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(20, 22, 31, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 22, 31, 0.04) 1px, transparent 1px);
   background-size: 70px 70px;
   -webkit-mask-image: radial-gradient(680px 460px at 50% 4%, #000 0%, transparent 80%);
   mask-image: radial-gradient(680px 460px at 50% 4%, #000 0%, transparent 80%);
@@ -26,8 +26,9 @@
 .recovery::after {
   content: "";
   position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-line) 22%, var(--gold) 50%, var(--gold-line) 78%, transparent);
-  opacity: 0.8;
+  background: linear-gradient(90deg, transparent, var(--gold-line-strong) 22%, var(--gold-bright) 50%, var(--gold-line-strong) 78%, transparent);
+  opacity: 0.95;
+  box-shadow: 0 1px 10px var(--gold-glow-soft);
 }
 .recovery .wrap { position: relative; z-index: 2; }
 
@@ -36,13 +37,16 @@
   font-size: clamp(30px, 4vw, 48px);
   margin: 24px 0 16px;
   color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.022em;
 }
 .rec-head .underline {
   display: block;
-  width: 56px; height: 3px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  width: 72px; height: 3px;
+  background: var(--grad-gold);
   border-radius: 3px;
   margin: 14px auto 22px;
+  box-shadow: 0 2px 8px rgba(168, 127, 26, 0.32), 0 0 14px var(--gold-glow-soft);
 }
 .rec-head p {
   font-size: clamp(15px, 1.6vw, 17px);
@@ -180,24 +184,25 @@
 .step.active .ico-ring {
   background:
     radial-gradient(circle at 30% 22%, #ffffff, transparent 65%),
-    linear-gradient(160deg, #fff8eb, #faecd2);
-  border-color: var(--gold);
+    linear-gradient(160deg, #fff5d6, #f3dc92);
+  border-color: var(--gold-bright);
   box-shadow: var(--shadow-glow);
-  transform: translateY(-8px) scale(1.05);
+  transform: translateY(-8px) scale(1.06);
   animation: goldPulse 3.6s var(--ease) infinite;
 }
-.step.active:hover .ico-ring { transform: translateY(-12px) scale(1.05); }
-.step.active .ico-ring svg { stroke: var(--gold-bright); }
-.step.active .step-title { color: var(--gold-bright); }
+.step.active:hover .ico-ring { transform: translateY(-12px) scale(1.06); }
+.step.active .ico-ring svg { stroke: var(--gold-deep); }
+.step.active .step-title { color: var(--gold-deep); }
 .step.active .num-badge {
-  background: var(--gold);
+  background: var(--grad-gold);
   color: #fff;
-  border-color: var(--gold);
-  box-shadow: 0 0 14px var(--gold-glow);
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 16px var(--gold-glow), 0 4px 10px rgba(168, 127, 26, 0.30);
+  text-shadow: 0 1px 1px rgba(120, 88, 22, 0.30);
 }
 @keyframes goldPulse {
-  0%, 100% { box-shadow: 0 0 0 1px var(--gold-line), 0 0 26px var(--gold-glow), 0 18px 44px rgba(168, 124, 67, 0.22); }
-  50% { box-shadow: 0 0 0 1px var(--gold), 0 0 40px var(--gold-glow), 0 22px 50px rgba(168, 124, 67, 0.28); }
+  0%, 100% { box-shadow: 0 0 0 1px var(--gold-line-strong), 0 0 32px var(--gold-glow), 0 18px 44px rgba(168, 127, 26, 0.28); }
+  50%      { box-shadow: 0 0 0 1px var(--gold-bright), 0 0 50px var(--gold-glow), 0 22px 54px rgba(168, 127, 26, 0.36); }
 }
 
 .primary-tag {
@@ -228,8 +233,9 @@
 }
 .detail::before {
   content: "";
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-bright));
+  box-shadow: 0 2px 8px rgba(184, 137, 62, 0.24);
 }
 .detail-inner {
   display: grid;
@@ -304,7 +310,7 @@
   background: var(--gold-faint);
   border: 1px solid var(--gold-line);
 }
-.d-item .d-ico svg { width: 16px; height: 16px; stroke: var(--gold-bright); }
+.d-item .d-ico svg { width: 16px; height: 16px; stroke: var(--gold-deep); }
 .d-item .d-text b {
   font-size: 13.5px; font-weight: 600; color: var(--ink);
   display: block; margin-bottom: 2px;

@@ -183,3 +183,30 @@ export const Check = (p) => (
     <path d="M20 6 9 17l-5-5" />
   </svg>
 );
+
+/* Blog / Customers icons */
+export const BookOpen = (p) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}>
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+  </svg>
+);
+
+export const TrendChart = (p) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}>
+    <path d="M3 3v18h18" />
+    <path d="M18.7 8 13 14l-3-3-4.3 4.3" />
+  </svg>
+);
+
+export const Sparkles = (p) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}>
+    <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" />
+  </svg>
+);
+
+export const StarFilled = (p) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+    <polygon points="12 2 15 8.5 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 9 8.5 12 2" />
+  </svg>
+);

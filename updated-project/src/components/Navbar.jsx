@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Logo, Menu } from './Icons.jsx';
+import { Logo, Menu, ArrowRight } from './Icons.jsx';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -13,20 +13,18 @@ export default function Navbar() {
           <span className="logo-mark" aria-hidden="true">
             <Logo style={{ width: 20, height: 20, stroke: '#fff' }} />
           </span>
-          <span className="logo-text">
-           <span className="logo-text">DEBT RECOVERY</span>
-          </span>
+          {/* Brand name — fully black, no gold split */}
+          <span className="logo-text">DEBT RECOVERY</span>
         </a>
 
         <nav>
           <ul className={`nav-links${open ? ' open' : ''}`}>
-            <li><a href="#platform" onClick={close}>Platform</a></li>
-            <li><a href="#how" onClick={close}>How it works</a></li>
-            <li><a href="#features" onClick={close}>Features</a></li>
-            <li><a href="#customers" onClick={close}>Customers</a></li>
-            <li><a href="#blog" onClick={close}>Blog</a></li>
-            <li><a href="#jobs" onClick={close}>Jobs</a></li>
-            <li><a href="#contact" onClick={close}>Contact</a></li>
+            <li><a href="#platform"   onClick={close}>Platform</a></li>
+            <li><a href="#how"        onClick={close}>How it works</a></li>
+            <li><a href="#features"   onClick={close}>Features</a></li>
+            <li><a href="#customers"  onClick={close}>Customers</a></li>
+            <li><a href="#blog"       onClick={close}>Blog</a></li>
+            <li><a href="#jobs"       onClick={close}>Jobs</a></li>
           </ul>
         </nav>
 
@@ -38,7 +36,11 @@ export default function Navbar() {
           >
             <Menu style={{ width: 20, height: 20, stroke: 'var(--ink)' }} />
           </button>
-          <a href="#contact" className="btn btn-primary">Book Demo</a>
+          {/* CTA renamed from "Book Demo" → "Explore Platform" (PDF #5) */}
+          <a href="#how" className="btn btn-primary">
+            Explore Platform
+            <ArrowRight width={14} height={14} />
+          </a>
         </div>
       </div>
     </header>

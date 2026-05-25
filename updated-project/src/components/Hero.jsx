@@ -28,11 +28,11 @@ export default function Hero() {
           <span className="trust-line reveal">
             <span
               style={{
-                width: 5,
-                height: 5,
+                width: 6,
+                height: 6,
                 borderRadius: '50%',
-                background: 'var(--gold)',
-                boxShadow: '0 0 6px var(--gold-glow)',
+                background: 'var(--gold-bright)',
+                boxShadow: '0 0 10px var(--gold-glow), 0 0 4px var(--gold-light)',
               }}
             />
             Trusted by 50+ banks, NBFCs &amp; fintech lenders
@@ -53,7 +53,7 @@ export default function Hero() {
               Explore Platform
               <ArrowRight width={14} height={14} />
             </a>
-            <a href="#contact" className="btn btn-outline">Talk to sales</a>
+            <a href="#features" className="btn btn-outline">See features</a>
           </div>
 
           {/* Only 3 key points kept — PDF requirement #3 */}
@@ -61,7 +61,7 @@ export default function Hero() {
             {STATS.map(({ Icon, title, body }) => (
               <div className="hero-stat" key={title}>
                 <div className="ico">
-                  <Icon style={{ width: 18, height: 18, stroke: 'var(--gold-bright)' }} />
+                  <Icon style={{ width: 18, height: 18, stroke: 'var(--gold-deep)' }} />
                 </div>
                 <h4>{title}</h4>
                 <p>{body}</p>
