@@ -1,0 +1,93 @@
+/*
+ * Data for the How-It-Works timeline.
+ * Five stages, lifted verbatim from the luxury reference file.
+ */
+
+export const TIMELINE_STEPS = [
+  {
+    id: 0,
+    badge: '01',
+    title: 'Pre-Due',
+    bullets: ['SMS reminders', 'Early engagement'],
+    label: 'Stage 01',
+    fullTitle: 'Pre-Due Engagement',
+    desc: 'Gentle, well-timed outreach before the due date — keeping accounts current and reducing roll-forward.',
+    m1: ['T-7d', 'First contact'],
+    m2: ['SMS', 'Primary channel'],
+    items: [
+      { title: 'SMS Reminders', body: 'Scheduled nudges ahead of the due date.' },
+      { title: 'Early Engagement', body: 'Opening the conversation before stress sets in.' },
+    ],
+  },
+  {
+    id: 1,
+    badge: '02',
+    title: 'IVR & Bot',
+    bullets: ['Automated calls & AI communication bot', 'Payment links'],
+    primary: true,
+    label: 'Stage 02 \u00B7 Primary',
+    fullTitle: 'IVR & AI Bot Automation',
+    desc: 'The automation core — outbound voice and AI communication bot handle volume at scale, around the clock.',
+    m1: ['24/7', 'Always on'],
+    m2: ['80%+', 'Self-serve rate'],
+    items: [
+      { title: 'IVR — Inbound & Outbound', body: "Automated voice calls in the customer's language." },
+      { title: 'AI Communication Bot', body: 'Conversational AI for reminders and quick replies.' },
+      { title: 'Auto Reminders', body: 'Rule-based follow-ups with no manual effort.' },
+      { title: 'Payment Links', body: 'Instant, secure links inside the conversation.' },
+      { title: 'Smart Routing', body: 'Right case to the right channel automatically.' },
+      { title: 'Live CRM Sync', body: 'Every interaction logged back to the system.' },
+    ],
+  },
+  {
+    id: 2,
+    badge: '03',
+    title: 'Recovery',
+    bullets: ['Tele-calling & field visits', 'Continuous follow-ups'],
+    label: 'Stage 03',
+    fullTitle: 'Active Recovery',
+    desc: 'Where automation hands off to people — trained agents and field teams drive resolution on tougher accounts.',
+    m1: ['Tele + Field', 'Coverage'],
+    m2: ['Daily', 'Follow-up cadence'],
+    items: [
+      { title: 'Tele-calling', body: 'Trained agents handle negotiation and queries.' },
+      { title: 'Field Visits', body: 'On-ground contact for high-value cases.' },
+      { title: 'Continuous Follow-ups', body: 'A structured cadence until resolution.' },
+      { title: 'Case Notes', body: 'Every touchpoint recorded for full context.' },
+    ],
+  },
+  {
+    id: 3,
+    badge: '04',
+    title: 'Settlement',
+    bullets: ['One-time settlement', 'EMI plans', 'Digital agreements'],
+    label: 'Stage 04',
+    fullTitle: 'Settlement',
+    desc: 'Flexible, fair resolution paths that close accounts while keeping the customer relationship intact.',
+    m1: ['OTS / EMI', 'Options'],
+    m2: ['On Request', 'Digital agreements'],
+    items: [
+      { title: 'One-Time Settlement', body: 'A single negotiated payment to close.' },
+      { title: 'EMI Plans', body: 'Structured installments that fit the customer.' },
+      { title: 'Digital Agreements', body: 'Paperless confirmation — available on client requirement.', optional: true },
+      { title: 'Approval Workflow', body: 'Settlements routed for fast sign-off.' },
+    ],
+  },
+  {
+    id: 4,
+    badge: '05',
+    title: 'Closure',
+    bullets: ['CRM updates', 'Reports & compliance'],
+    label: 'Stage 05',
+    fullTitle: 'Closure & Compliance',
+    desc: 'A clean wrap-up — records updated, reports generated and every account closed audit-ready.',
+    m1: ['Auto', 'CRM update'],
+    m2: ['100%', 'Audit coverage'],
+    items: [
+      { title: 'CRM Updates', body: 'Final status synced across the system.' },
+      { title: 'Reports & MIS', body: 'Portfolio-level reporting for clients.' },
+      { title: 'Compliance Sign-off', body: 'Every action verified and logged.' },
+      { title: 'Closure Confirmation', body: 'Customer receives clear written closure.' },
+    ],
+  },
+];
