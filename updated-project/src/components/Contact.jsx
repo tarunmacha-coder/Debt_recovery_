@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowRight } from './Icons.jsx';
 
 export default function Contact() {
   return (
@@ -17,17 +16,6 @@ export default function Contact() {
           </p>
         </div>
 
-        <div
-          className="reveal"
-          data-d="3"
-          style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}
-        >
-          <a href="mailto:hello@debtrecovery.example" className="btn btn-primary">
-            Book Demo
-            <ArrowRight width={14} height={14} />
-          </a>
-          <a href="mailto:hello@debtrecovery.example" className="btn btn-outline">Email us</a>
-        </div>
       </div>
     </section>
   );

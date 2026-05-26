@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Logo, Menu, ArrowRight } from './Icons.jsx';
 
-export default function Navbar() {
+export default function Navbar({ onBookDemo }) {
   const [open, setOpen] = useState(false);
 
   const close = () => setOpen(false);
@@ -25,6 +25,7 @@ export default function Navbar() {
             <li><a href="#customers"  onClick={close}>Customers</a></li>
             <li><a href="#blog"       onClick={close}>Blog</a></li>
             <li><a href="#jobs"       onClick={close}>Jobs</a></li>
+            <li><a href="#contact"    onClick={close}>Contact</a></li>
           </ul>
         </nav>
 
@@ -36,11 +37,10 @@ export default function Navbar() {
           >
             <Menu style={{ width: 20, height: 20, stroke: 'var(--ink)' }} />
           </button>
-          {/* CTA renamed from "Book Demo" → "Explore Platform" (PDF #5) */}
-          <a href="#how" className="btn btn-primary">
-            Explore Platform
+          <button className="btn btn-primary" onClick={onBookDemo}>
+            Book a Demo
             <ArrowRight width={14} height={14} />
-          </a>
+          </button>
         </div>
       </div>
     </header>

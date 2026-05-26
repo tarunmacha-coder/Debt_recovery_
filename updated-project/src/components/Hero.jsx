@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Chart, Card, ArrowRight } from './Icons.jsx';
+import { Phone, Chart, Card } from './Icons.jsx';
 
 const STATS = [
   {
@@ -47,14 +47,6 @@ export default function Hero() {
             Recover more, ethically and at scale. One intelligent platform unifying AI voice agents,
             omnichannel outreach, field collections and real-time analytics — built for modern lenders.
           </p>
-
-          <div className="hero-cta reveal" data-d="3">
-            <a href="#how" className="btn btn-primary">
-              Explore Platform
-              <ArrowRight width={14} height={14} />
-            </a>
-            <a href="#features" className="btn btn-outline">See features</a>
-          </div>
 
           {/* Only 3 key points kept — PDF requirement #3 */}
           <div className="hero-stats reveal" data-d="4">
