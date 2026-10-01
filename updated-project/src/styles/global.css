@@ -1481,6 +1481,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border: 1px solid rgba(200, 60, 60, 0.30);
   color: #c03c3c;
 }
+/* fields flagged by form validation reuse the error colour above */
+.demo-field input[aria-invalid="true"],
+.demo-field textarea[aria-invalid="true"] {
+  border-color: rgba(192, 60, 60, 0.55);
+  box-shadow: 0 0 0 3px rgba(200, 60, 60, 0.08);
+}
 
 .demo-submit {
   align-self: flex-start;

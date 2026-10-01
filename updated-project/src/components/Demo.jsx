@@ -1,68 +1,60 @@
-import React, { useState } from 'react';
-import * as XLSX from 'xlsx';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from './Icons.jsx';
+import { clearLegacyLocalCopies, errorSummary, submitNetlifyForm, validate } from './netlifyForms.js';
 
 const EMPTY = { name: '', email: '', phone: '', company: '', message: '' };
-const LS_KEY = 'demo_submissions';
+const REQUIRED = ['name', 'email', 'phone', 'company'];
+const FIELD_ORDER = ['name', 'email', 'phone', 'company'];
 
-function saveToLocalStorage(entry) {
-  const existing = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
-  existing.push(entry);
-  localStorage.setItem(LS_KEY, JSON.stringify(existing));
-  return existing;
-}
-
-function downloadExcel(rows) {
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.json_to_sheet(rows, {
-    header: ['name', 'email', 'phone', 'company', 'message', 'submittedAt'],
-  });
-  ws['!cols'] = [
-    { wch: 22 }, { wch: 28 }, { wch: 18 },
-    { wch: 24 }, { wch: 36 }, { wch: 24 },
-  ];
-  XLSX.utils.book_append_sheet(wb, ws, 'Demo Requests');
-  XLSX.writeFile(wb, 'demo-submissions.xlsx');
-}
+/* off-screen, not display:none — the honeypot has to look fillable to a bot */
+const HONEYPOT_STYLE = { position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' };
 
 export default function DemoModal({ onClose }) {
   const [form, setForm] = useState(EMPTY);
   const [status, setStatus] = useState(null); // null | 'loading' | 'success' | 'error'
+  const [errors, setErrors] = useState({});
+  const [errorMsg, setErrorMsg] = useState('');
+  const [botField, setBotField] = useState('');
+  const formRef = useRef(null);
 
-  const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  useEffect(clearLegacyLocalCopies, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+    if (status === 'success' || status === 'error') setStatus(null);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const found = validate(form, REQUIRED);
+    if (Object.keys(found).length) {
+      setErrors(found);
+      setErrorMsg(errorSummary(found));
+      setStatus('error');
+      const first = FIELD_ORDER.find((f) => found[f]);
+      formRef.current?.querySelector(`[name="${first}"]`)?.focus();
+      return;
+    }
+
+    setErrors({});
     setStatus('loading');
-
-    const entry = {
-      ...form,
-      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-    };
-
-    // Always save locally first as a backup
-    const allRows = saveToLocalStorage(entry);
-
     try {
-      const res = await fetch('/api/demo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+      await submitNetlifyForm('book-demo', {
+        'bot-field': botField,
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        company: form.company.trim(),
+        message: form.message.trim(),
       });
-
-      if (res.ok) {
-        // Backend saved to Excel on server
-        setStatus('success');
-        setForm(EMPTY);
-      } else {
-        throw new Error('Backend error');
-      }
-    } catch {
-      // Backend unavailable — download Excel directly in browser
-      downloadExcel(allRows);
       setStatus('success');
       setForm(EMPTY);
+    } catch {
+      setErrorMsg('Sorry, we couldn’t send your request. Please check your connection and try again.');
+      setStatus('error');
     }
   };
 
@@ -93,7 +85,13 @@ export default function DemoModal({ onClose }) {
           </p>
         </div>
 
-        <form className="apply-form" onSubmit={handleSubmit} noValidate>
+        <form ref={formRef} className="apply-form" name="book-demo" onSubmit={handleSubmit} noValidate>
+          <p style={HONEYPOT_STYLE} aria-hidden="true">
+            <label>
+              Don’t fill this out if you’re human:{' '}
+              <input name="bot-field" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
+            </label>
+          </p>
           <div className="demo-form-row">
             <div className="demo-field">
               <label htmlFor="demo-name">Full Name <span className="demo-req">*</span></label>
@@ -101,6 +99,7 @@ export default function DemoModal({ onClose }) {
                 id="demo-name" name="name" type="text"
                 placeholder="Your full name" required
                 value={form.name} onChange={handleChange}
+                aria-invalid={errors.name ? 'true' : undefined}
               />
             </div>
             <div className="demo-field">
@@ -109,6 +108,7 @@ export default function DemoModal({ onClose }) {
                 id="demo-email" name="email" type="email"
                 placeholder="you@company.com" required
                 value={form.email} onChange={handleChange}
+                aria-invalid={errors.email ? 'true' : undefined}
               />
             </div>
           </div>
@@ -120,6 +120,7 @@ export default function DemoModal({ onClose }) {
                 id="demo-phone" name="phone" type="tel"
                 placeholder="+91 98765 43210" required
                 value={form.phone} onChange={handleChange}
+                aria-invalid={errors.phone ? 'true' : undefined}
               />
             </div>
             <div className="demo-field">
@@ -128,6 +129,7 @@ export default function DemoModal({ onClose }) {
                 id="demo-company" name="company" type="text"
                 placeholder="Your organisation" required
                 value={form.company} onChange={handleChange}
+                aria-invalid={errors.company ? 'true' : undefined}
               />
             </div>
           </div>
@@ -142,8 +144,13 @@ export default function DemoModal({ onClose }) {
           </div>
 
           {status === 'success' && (
-            <div className="demo-feedback demo-success">
+            <div className="demo-feedback demo-success" role="status">
               Thank you! Our team will reach out within 24 hours.
+            </div>
+          )}
+          {status === 'error' && (
+            <div className="demo-feedback demo-error" role="alert">
+              {errorMsg}
             </div>
           )}
 

@@ -11,6 +11,7 @@ import Jobs from './components/Jobs.jsx';
 import Contact from './components/Contact.jsx';
 import DemoModal from './components/Demo.jsx';
 import Footer from './components/Footer.jsx';
+import ImmersiveLayer from './immersive/ImmersiveLayer.jsx';
 import { useScrollReveal } from './hooks/useScrollReveal.js';
 import { useSmoothNav } from './hooks/useSmoothNav.js';
 
@@ -28,6 +29,7 @@ export default function App() {
 
   return (
     <>
+      <ImmersiveLayer />
       <Navbar onBookDemo={() => setDemoOpen(true)} />
       <main>
         <Hero />
